@@ -8,6 +8,6 @@ namespace To_dos.Controllers;
 public class HelloWorldController: Controller{
     [HttpGet(Name = "GetTodos")]
     public IActionResult GetTodos(){
-        return Ok(new HelloWorld("message"));
+        return Ok(new HelloWorld("Hello world!"));
         }
 }
