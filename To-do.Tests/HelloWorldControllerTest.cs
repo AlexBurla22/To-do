@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-
-namespace To_dos.Controllers;
+using To_dos.Controllers;
 
 public class HelloWorldControllerTest
 {
