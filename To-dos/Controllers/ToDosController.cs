@@ -15,15 +15,20 @@ public class ToDosController: Controller{
         _repository = new ToDosRepository();
     }
 
-    [Route("ListAll")]
+    [Route("GetAll")]
     [HttpGet]
     public IActionResult GetToDosList(){
         return Ok(_repository.GetAll());
     }
     
-    [HttpGet("{id}")]
+    [Route("GetById/{id?}")]
+    [HttpGet]
     public IActionResult GetToDoByID(int id){
-        return NoContent();
+        var toDo = _repository.GetByID(id);
+        if(toDo == null){
+            return NotFound();
+        }
+        return Ok(toDo);
     }
 
     [HttpPost]
