@@ -106,4 +106,28 @@ public class ToDosTest
         var getResult = _controller.GetToDoByID(idToBeRemoved);
         Assert.IsType<NotFoundResult>(getResult);
     }
+
+    [Fact]
+    public void UpdateToDo_ReturnsNotFound_WhenNotFound()
+    {
+        // Given
+        ToDoItem toBeUpdated = new ToDoItem(20, "mancare", false);
+        // When
+                var actionResult = _controller.UpdateToDo(toBeUpdated);
+        // Then
+        Assert.IsType<NotFoundResult>(actionResult);
+    }
+
+    [Fact]
+    public void UpdateToDo_ReturnsUpdatedToDo_WhenFound()
+    {
+        // Given
+        ToDoItem toBeUpdated = new ToDoItem(3, "mancare", false);
+        // When
+        var actionResult = _controller.UpdateToDo(toBeUpdated) as CreatedAtActionResult;
+        var toDoItem = actionResult.Value;
+        // Then
+        Assert.IsType<ToDoItem>(toDoItem);
+        Assert.Equal("mancare", (toDoItem as ToDoItem).text);
+    }
 }
