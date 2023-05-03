@@ -31,12 +31,15 @@ public class ToDosController: Controller{
         return Ok(toDo);
     }
 
+    [Route("AddToDo")]
     [HttpPost]
-    public IActionResult AddToDo(ToDoItem item){
-        return NoContent();
+    public IActionResult AddToDo(ToDoItem toDo){
+         var toDoAdded = _repository.Insert(toDo);
+        return CreatedAtAction("Get", new {id = toDoAdded.id}, toDoAdded);
     }
 
-    [HttpDelete("{id}")] 
+    [Route("Delete/{id?}")]
+    [HttpDelete] 
     public IActionResult RemoveToDo(int id){
         return NoContent();
     }
