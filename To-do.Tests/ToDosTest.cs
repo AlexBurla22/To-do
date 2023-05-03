@@ -83,4 +83,27 @@ public class ToDosTest
         Assert.IsType<ToDoItem>(toDoItem);
         Assert.Equal("hranit pisica", (toDoItem as ToDoItem).text);
     }
+
+    [Fact]
+    public void RemoveToDo_ReturnsNotFound_WhenNotFound()
+    {
+        // Given
+        int idToBeRemoved = 10;
+        // When
+        var actionResult = _controller.RemoveToDo(idToBeRemoved);
+        // Then
+        Assert.IsType<NotFoundResult>(actionResult);
+    }
+
+    [Fact]
+    public void RemoveToDo_RemovesItem_WhenFound()
+    {
+        // Given
+        int idToBeRemoved = 4;
+        // When
+        _controller.RemoveToDo(idToBeRemoved);
+        // Then
+        var getResult = _controller.GetToDoByID(idToBeRemoved);
+        Assert.IsType<NotFoundResult>(getResult);
+    }
 }
