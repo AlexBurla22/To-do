@@ -34,13 +34,18 @@ public class ToDosController: Controller{
     [Route("AddToDo")]
     [HttpPost]
     public IActionResult AddToDo(ToDoItem toDo){
-         var toDoAdded = _repository.Insert(toDo);
+        var toDoAdded = _repository.Insert(toDo);
         return CreatedAtAction("Get", new {id = toDoAdded.id}, toDoAdded);
     }
 
     [Route("Delete/{id?}")]
     [HttpDelete] 
     public IActionResult RemoveToDo(int id){
+        var toBeRemoved = _repository.GetByID(id);
+        if(toBeRemoved == null){
+            return NotFound();
+        }
+        _repository.Remove(toBeRemoved.id);
         return NoContent();
     }
 }
