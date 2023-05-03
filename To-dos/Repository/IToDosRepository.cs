@@ -4,8 +4,8 @@ namespace To_dos.Repository{
     public interface IToDosRepository{
         IEnumerable<ToDoItem> GetAll();
         ToDoItem GetByID(int id);
-        void Insert(ToDoItem item);
-        void Update(ToDoItem item);
+        ToDoItem Insert(ToDoItem item);
+        ToDoItem Update(ToDoItem item);
         void Remove(int id);
     }
 }

@@ -21,9 +21,10 @@ namespace To_dos.Repository{
             return _toDoItems.Find(item => item.id == id);
         }
 
-        public void Insert(ToDoItem toDo)
+        public ToDoItem Insert(ToDoItem toDo)
         {
             _toDoItems.Add(toDo);
+            return toDo;
         }
 
         public void Remove(int id)
@@ -32,10 +33,11 @@ namespace To_dos.Repository{
             _toDoItems.Remove(result);
         }
 
-        public void Update(ToDoItem toDo)
+        public ToDoItem Update(ToDoItem toDo)
         {
             var index = _toDoItems.FindIndex(item => item.id == toDo.id);
             _toDoItems[index] = toDo;
+            return toDo;
         }
     }
 }

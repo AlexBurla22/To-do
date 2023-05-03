@@ -59,4 +59,28 @@ public class ToDosTest
         Assert.IsType<ToDoItem>(item);
         Assert.Equal(testId, (item as ToDoItem).id);
     }
+
+    [Fact]
+    public void AddToDo_ReturnsOk()
+    {
+        // Given
+        ToDoItem toBeAdded = new ToDoItem(9, "hranit pisica", true);
+        // When
+        var actionResult = _controller.AddToDo(toBeAdded);
+        // Then
+        Assert.IsType<CreatedAtActionResult>(actionResult);
+    }
+
+    [Fact]
+    public void AddToDo_ReturnsItemAdded()
+    {
+        // Given
+        ToDoItem toBeAdded = new ToDoItem(9, "hranit pisica", true);
+        // When
+        var actionResult = _controller.AddToDo(toBeAdded) as CreatedAtActionResult;
+        var toDoItem = actionResult.Value;
+        // Then
+        Assert.IsType<ToDoItem>(toDoItem);
+        Assert.Equal("hranit pisica", (toDoItem as ToDoItem).text);
+    }
 }
