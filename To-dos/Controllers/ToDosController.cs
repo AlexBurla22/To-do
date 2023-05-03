@@ -48,4 +48,15 @@ public class ToDosController: Controller{
         _repository.Remove(toBeRemoved.id);
         return NoContent();
     }
+
+    [Route("Update/{id?}")]
+    [HttpPost]
+    public IActionResult UpdateToDo(ToDoItem toDo){
+        var toBeUpdated = _repository.GetByID(toDo.id);
+        if(toBeUpdated == null){
+            return NotFound();
+        }
+        var updatedToDo = _repository.Update(toDo);
+        return CreatedAtAction("Get", new {id = updatedToDo.id}, updatedToDo);
+    }
 }
